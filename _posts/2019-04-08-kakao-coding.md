@@ -13,7 +13,7 @@ comments: true
 
 
 ## 1. 비밀 지도(난이도: 하)
-[비트 연산자](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators)를 활용하여 풀이
+[비트 연산자](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators){:target="_blank"}를 활용하여 풀이
 ```javascript
 function secretMap(n, arr1, arr2){
     const result = []
@@ -34,7 +34,7 @@ secretMap(6, [46, 33, 33 ,22, 31, 50], [27 ,56, 19, 14, 14, 10])
 ```
 
 ## 2. 다트 게임(난이도: 하)
-[정규표현식](https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/%EC%A0%95%EA%B7%9C%EC%8B%9D)을 활용하여 풀이
+[정규표현식](https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/%EC%A0%95%EA%B7%9C%EC%8B%9D){:target="_blank"}을 활용하여 풀이
 ```javascript
 function dartGame(dartResult){
     let result;
