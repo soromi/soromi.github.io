@@ -5,7 +5,10 @@ tags: [TIL, javascript, coding]
 comments: true
 ---
 스터디 목적으로 문제별 사용되는 알고리즘 유형을 선행 공부하고 풀이합니다.
-1년 전 팀과 같이 풀이하고 리뷰했었는데 코드를 따로 저장하지 않아 다시 한 번 풀어 정리했습니다. 코드 리뷰는 언제나 환영합니다!
+1년 전 팀과 같이 풀이하고 리뷰했었는데 코드를 따로 저장하지 않아 다시 한 번 풀어 정리했습니다. 
+
+주로 순서 구상(주석에 내용 정리) 후 순서대로 구현합니다.
+코드 리뷰는 언제나 환영합니다!
 
 1차 합격 기준은 문제에 상관없이 **총 7문제 중 4문제 이상**을 맞춰야합니다. 
 자세한 정보와 문제 설명은 
@@ -119,4 +122,53 @@ checkCacheTime(2, ["Jeju", "Pangyo", "Seoul", "NewYork", "LA", "SanFrancisco", "
 checkCacheTime(5, ["Jeju", "Pangyo", "Seoul", "NewYork", "LA", "SanFrancisco", "Seoul", "Rome", "Paris", "Jeju", "NewYork", "Rome"]); //52
 checkCacheTime(2, ["Jeju", "Pangyo", "NewYork", "newyork"]); //16
 checkCacheTime(0, ["Jeju", "Pangyo", "Seoul", "NewYork", "LA"]); //25
+```
+
+## 5. 뉴스 클러스터링(난이도: 중)
+[Jaccard similarity](https://mun-su.github.io/2017/09/28/Algorithm/basic/jaccard_similarity/){:target="_blank"}, 
+[Clustering](https://ratsgo.github.io/machine%20learning/2017/04/16/clustering/){:target="_blank"},  
+[Array intersection difference and union in ES6](https://medium.com/@alvaro.saburido/set-theory-for-arrays-in-es6-eb2f20a61848){:target="_blank"}
+을 활용하여 풀이
+```javascript
+function newsClustering(str1, str2){
+    let str1Arr = setArr(str1)
+    let str2Arr = setArr(str2)
+    let union = 0;
+    let intersection = 0
+
+    // 조건에 맞는 배열 만들기
+    function setArr(str){
+        let strArr = [];
+        for(let i=0; i<str.length-1; i++ ) {
+            // 대문자로 변환후 2개씩 끊어 조각내기
+            strPiece = str.toUpperCase().substr(i,2);
+
+            // 대문자 이외의 문자가 없으면 배열에 추가
+            if (!/[^A-Z]/gi.test(strPiece)) strArr.push(strPiece);
+        }
+        return strArr;
+    }
+
+    // 공집합 배열 생성
+    let unionArr = [...new Set([...str1Arr, ...str2Arr])];
+
+    // 공집합 내의 원소값들이 각각 몇개가 있는지 체크 (다중집합)
+    unionArr.forEach(i => {
+        const filterArr1 = str1Arr.filter(x => x === i).length;
+        const filterArr2 = str2Arr.filter(x => x === i).length;
+
+        // 공집합(최대값), 교집합(최소값) 체크
+        union += Math.max(filterArr1, filterArr2);
+        intersection += Math.min(filterArr1, filterArr2);
+    });
+
+    // 문제 조건 계산법
+    return (union === 0 ? 65536 : Math.floor(intersection / union * 65536));
+}
+
+//test case
+newsClustering("FRANCE", "french") //16384
+newsClustering("handshake", "shake hands") //65536
+newsClustering("aa1+aa2", "AAAA12") //43690
+newsClustering("1S*2T*3S", "e=m*c^2") //65536
 ```
