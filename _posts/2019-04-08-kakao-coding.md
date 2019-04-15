@@ -78,7 +78,6 @@ dartGame("1S*2T*3S") //23
 dartGame("1D#2S*3S") //5
 dartGame("1T2D3D#") //-4
 dartGame("1D2S3T*") //59
-
 ```
 
 ## 3. 캐시(난이도: 하)
@@ -122,6 +121,61 @@ checkCacheTime(2, ["Jeju", "Pangyo", "Seoul", "NewYork", "LA", "SanFrancisco", "
 checkCacheTime(5, ["Jeju", "Pangyo", "Seoul", "NewYork", "LA", "SanFrancisco", "Seoul", "Rome", "Paris", "Jeju", "NewYork", "Rome"]); //52
 checkCacheTime(2, ["Jeju", "Pangyo", "NewYork", "newyork"]); //16
 checkCacheTime(0, ["Jeju", "Pangyo", "Seoul", "NewYork", "LA"]); //25
+```
+
+## 4. 셔틀버스(난이도: 중)
+문제 이해를 잘못하고.... 몇 번에 걸쳐 다시 풀었던 문제네요.  
+개인적으로 다시 봐도 헷갈리는 문제같습니다. (ㅠㅠ)
+```javascript
+
+function shuttleBus(n, t, m, timetable){
+    let result;
+    let time = getTime("09:00"); // 첫 셔틀버스 시간은 9시이므로
+    const cleanTimetable = [];
+
+    function getTime(time){
+        return (Number(time[0] + time[1]) * 60) + (Number(time[3] + time[4]));
+    }
+
+    // 줄 선 크루 배열 재구성 (String -> Number형으로 변환)
+    for(let i = 0; i < timetable.length; i++) {
+        cleanTimetable.push(getTime(timetable[i]));
+    }
+
+    // 줄 선 크루 배열 오름차순 재배치(sort) 및 마지막 시간
+    cleanTimetable.sort((a, b) => a - b);
+    
+    // 줄 선 크루 차례대로 시간별(n) 카카오 셔틀버스 타기
+    for (let i = 0; i < n; i++) {
+        // 탈 수 있는 크루 몇 명인지 필터링
+        let goCrews = cleanTimetable.filter(crew => time >= crew).length;
+
+        // 크루들을 태운다
+        if (i === n - 1) {
+            // 만약, 마지막 운행이고
+            // 나머지 인원이 차에 꽉 차서 못탈 경우 
+            // 그 전에 타야하므로 와야하는 맞춰서 시간 업데이트  
+            if (goCrews >= m) time = cleanTimetable[m-1] - 1;
+        } else {
+            // 마지막 운행이 아니라면
+            // 탈 수 있는 크루(최대 m명)들 배열에서 삭제(splice)하고, 현재 셔틀버스 시간 업데이트
+            cleanTimetable.splice(0, goCrews > m ? m : goCrews);
+            time += t;
+        }
+    }
+
+    // 문제 출력값에 맞는 Number -> String형으로 변환
+    result = String(Math.floor(time/60)).padStart(2, "0") + ":" + String(time%60).padStart(2, "0");
+    return result;
+}
+
+//test case
+shuttleBus(1, 1, 5, ["08:00", "08:01", "08:02", "08:03"]) //"09:00"
+shuttleBus(2, 10, 2, ["09:10", "09:09", "08:00"]) //"09:09"
+shuttleBus(2, 1, 2, ["09:00", "09:00", "09:00", "09:00"]) //"08:59"
+shuttleBus(1, 1, 5, ["00:01", "00:01", "00:01", "00:01", "00:01"]) //"00:00"
+shuttleBus(1, 1, 1, ["23:59"]) //"09:00"
+shuttleBus(10, 60, 45, ["23:59","23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59"]) //"18:00"
 ```
 
 ## 5. 뉴스 클러스터링(난이도: 중)
@@ -172,3 +226,15 @@ newsClustering("handshake", "shake hands") //65536
 newsClustering("aa1+aa2", "AAAA12") //43690
 newsClustering("1S*2T*3S", "e=m*c^2") //65536
 ```
+
+
+------
+###### 코멘트
+
+정확히 이해해야 예외 상황을 마주하지 않겠지만,
+긴 문제를 이해하는 것에 집중하다보니 풀이 시간이 조금 지체된 것 같습니다. 
+비전공자로 부족했던 이론을 공부할 수 있었던 시간이었습니다. 부지런하게 공부해야겠습니다.
+
+나중에 봐도 이해하기 쉽게 하려고 변수명을 구구절절식으로 만들게 되는 듯 헤서 아쉽습니다.
+또 ES6을 잘 활용하지 못한 것 같아서 언젠가 수정하는 걸로.. 
+시간이 지나 다시 보면 부끄럽기도 하겠지만 제가 성장했음을 느낄 수 있겠죠?  🙂
