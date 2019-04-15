@@ -19,21 +19,22 @@ comments: true
 [비트 연산자](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators){:target="_blank"}를 활용하여 풀이
 ```javascript
 function secretMap(n, arr1, arr2){
-    const result = []
+    const result = [];
+    let binary, str;
 
-    // 비트연산자 비교(a|b)하여 2진수로 변환(toString)후 
+    // 비트연산자 비교(a|b)하여 2진수로 변환(toString), 자릿수 맞추기(padStart) 
     // 원하는 결과 값으로 문자바꾸기(replace)
     for (let i=0; i<n; i++) {
-        const binary = (arr1[i] | arr2[i]).toString(2);
-        const str = binary.replace(/0/g, " ").replace(/1/g, "#");
+        binary = (arr1[i] | arr2[i]).toString(2).padStart(n, "0")
+        str = binary.replace(/0/g, " ").replace(/1/g, "#");
         result.push(str);
     }
     return result;
 }
 
 //test case
-secretMap(5, [9, 20, 28, 18, 11], [30, 1, 21, 17, 28])
-secretMap(6, [46, 33, 33 ,22, 31, 50], [27 ,56, 19, 14, 14, 10])
+secretMap(5, [9, 20, 28, 18, 11], [30, 1, 21, 17, 28]);
+secretMap(6, [46, 33, 33 ,22, 31, 50], [27 ,56, 19, 14, 14, 10]);
 ```
 
 ## 2. 다트 게임(난이도: 하)
@@ -127,7 +128,6 @@ checkCacheTime(0, ["Jeju", "Pangyo", "Seoul", "NewYork", "LA"]); //25
 문제 이해를 잘못하고.... 몇 번에 걸쳐 다시 풀었던 문제네요.  
 개인적으로 다시 봐도 헷갈리는 문제같습니다. (ㅠㅠ)
 ```javascript
-
 function shuttleBus(n, t, m, timetable){
     let result;
     let time = getTime("09:00"); // 첫 셔틀버스 시간은 9시이므로
