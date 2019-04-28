@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "2018년 카카오(KAKAO) 신입공채 1차 코딩테스트 자바스크립트 풀이(1)"
+title: "2017년 카카오(KAKAO) 신입공채 1차 코딩테스트 자바스크립트 풀이(1)"
 tags: [TIL, javascript, coding]
 comments: true
 ---
@@ -41,7 +41,7 @@ secretMap(6, [46, 33, 33 ,22, 31, 50], [27 ,56, 19, 14, 14, 10]);
 [정규표현식](https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/%EC%A0%95%EA%B7%9C%EC%8B%9D){:target="_blank"}을 활용하여 풀이
 ```javascript
 function dartGame(dartResult){
-    let result;
+    const result;
     let currentStep = 0; // 문제 조건상 currentStep < 3입니다
     
     // 점수, 보너스옵션 분리
@@ -85,7 +85,7 @@ dartGame("1D2S3T*") //59
 [LRU](https://gomguard.tistory.com/115){:target="_blank"} 이론을 처음 접해서 어려워보였지만, 실제로는 나름 간단한 문제네요!
 ```javascript
 function checkCacheTime(cacheSize, cities){
-    let resultTime = 0;
+    const resultTime = 0;
     let citieArr = [];
     let cityStr;
 
@@ -129,7 +129,7 @@ checkCacheTime(0, ["Jeju", "Pangyo", "Seoul", "NewYork", "LA"]); //25
 개인적으로 다시 봐도 헷갈리는 문제같습니다. (ㅠㅠ)
 ```javascript
 function shuttleBus(n, t, m, timetable){
-    let result;
+    const result;
     let time = getTime("09:00"); // 첫 셔틀버스 시간은 9시이므로
     const cleanTimetable = [];
 
