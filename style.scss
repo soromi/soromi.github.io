@@ -73,7 +73,7 @@ h6 {
 
 p {
   color: $text-color;
-  margin: 15px 0;
+  margin: 10px 0;
 }
 
 a {
@@ -115,7 +115,8 @@ hr {
 
 ol, ul, dl {
 	font-weight: 100;
-	font-size: 16px;
+  font-size: 15px;
+  margin: 15px 0;
 }
 // Yeun's list style
 // https://gist.github.com/yeun/d824fc7b04b756508f4b0143535cec30
@@ -387,7 +388,7 @@ img {
 .site-description {
   margin: -5px 0 0 0;
   color: $gray;
-  font-size: 16px;
+  font-size: 15px;
 
   @include mobile {
     margin: 3px 0;
@@ -404,7 +405,7 @@ nav {
     float: none;
     margin-top: 9px;
     display: block;
-    font-size: 16px;
+    font-size: 15px;
   }
 
   a {
@@ -466,8 +467,9 @@ nav {
     }
       }
 	.entry {
+    margin-top: 20px;
 		p {
-			font-size: 16px;
+			font-size: 15px;
 			font-weight: 100;
     }
   }
