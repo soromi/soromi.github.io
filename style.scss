@@ -124,7 +124,7 @@ ol, ul, dl {
 ol, ul {
     > li {
         &:before {
-            position: relative;
+            position: absolute;
             width: $li-bullets-width;
             margin-left: -$li-bullets-width;
             display: inline-block;
@@ -638,6 +638,7 @@ footer {
 // Accodion
 .accordion {
     cursor: pointer;
+    text-align: left;
     &::after {
         content: '\02795'; /* Unicode character for "plus" sign (+) */
         position: relative;
@@ -673,6 +674,11 @@ footer {
     margin: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
+    li {
+        &:before {
+            position: relative;
+        }
+    }
 }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
